@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Result</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="tempbody">
+    <a href="/student/login" class="btn btn-info" style="margin-top: 5px;">Back</a>
+    <a href="/" class="btn btn-info logout-btn">Logout</a>
+    <h4 class="result-heading" style="margin-top: 2%;">Result</h4>
+    <div class="stuDetails">
+      <div class="stuDetail">
+        <p class="detail-label">Roll No.</p>
+        <p class="detail-value"><%= one.roll %></p>
+      </div>
+      <div class="stuDetail">
+        <p class="detail-label">Name</p>
+        <p class="detail-value"><%= one.name %></p>
+      </div>
+      <div class="stuDetail">
+        <p class="detail-label">Date of Birth</p>
+        <p class="detail-value"><%= one.dob %></p>
+      </div>
+      <div class="stuDetail">
+        <p class="detail-label">Score</p>
+        <p class="detail-value" id="scoreValue"><%= one.score %></p>
+      </div>
+      <div class="stuDetail">
+        <p class="detail-label">Result</p>
+        <p class="detail-value" id="resultText" class="result"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pass-criteria" id="passCriteria">
+    *You need to score above 33 to pass the exam.
+  </div>
+
+  <script>
+    const scoreElement = document.getElementById('scoreValue');
+    const resultTextElement = document.getElementById('resultText');
+    const passCriteriaElement = document.getElementById('passCriteria');
+    const score = parseInt(scoreElement.textContent);
+
+    if (score > 33) {
+      resultTextElement.textContent = 'Pass';
+      resultTextElement.classList.add('pass'); 
+      passCriteriaElement.style.display = 'none'; // Hide pass criteria
+    } else {
+      resultTextElement.textContent = '*Fail';
+      resultTextElement.classList.add('fail'); 
+      passCriteriaElement.style.display = 'block'; // Show pass criteria
+    }
+  </script>
+</body>
+
+</html>

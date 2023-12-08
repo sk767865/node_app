@@ -1,0 +1,50 @@
+<a href="/" class="btn btn-info logout-btn" style="margin-top: 0px; float: right;">Logout</a>
+
+<h3 style="margin-top: 5%;">Find Result</h3>
+<div class="teachLog">
+    <form method="POST" class="teachForm" id="studentLoginForm">
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Roll no :</label>
+            <input type="number" name="roll" class="form-control" id="rollInput">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">DOB :</label>
+            <input type="date" name="dob" class="form-control" id="dobInput">
+        </div>
+
+        <!-- Display error message -->
+        <% if (error) { %>
+            <p id="errorParagraph" style="color: red;">
+                <%= error %>
+            </p>
+            <% } %>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <button type="button" class="btn" id="clearFormButton"
+                    style="color: black;font-weight: 300;">Clear</button>
+    </form>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        
+        var studentLoginForm = document.getElementById("studentLoginForm");
+        var clearFormButton = document.getElementById("clearFormButton");
+        var rollInput = document.getElementById("rollInput");
+        var dobInput = document.getElementById("dobInput");
+        var errorParagraph = document.getElementById("errorParagraph");
+
+        
+        clearFormButton.addEventListener("click", function () {
+           
+            studentLoginForm.reset();
+
+         
+            rollInput.value = '';
+            dobInput.value = '';
+            errorParagraph.textContent = '';
+
+        });
+    });
+</script>

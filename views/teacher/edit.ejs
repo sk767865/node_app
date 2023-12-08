@@ -1,0 +1,94 @@
+<a href="/teacher/viewall" class="btn btn-info" style="margin-top: 5px;width: 5%;">Back</a>
+
+
+<h4>Editing Form for Student: <%= user[0].name %></h4>
+<% let submissionCount = 1; %>
+<form method="POST" class="addStu" autocomplete="off" onsubmit="return validateForm()">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name:</label>
+    <input type="text" name="name" required class="form-control" id="name" value="<%= user[0].name %>" />
+    <div id="nameError" class="error"></div>
+  </div>
+  <div class="mb-3">
+    <label for="roll" class="form-label">Roll No.:</label>
+    <input type="number" name="roll" required class="form-control" id="roll" value="<%= user[0].roll %>"  <% if (submissionCount = 2) { %>readonly<% } %> />
+    <div id="rollError" class="error"></div>
+  </div>
+  <div class="mb-3">
+    <label for="dob" class="form-label">Date of Birth:</label>
+    <input type="date" name="dob" required class="form-control" id="dob" value="<%= user[0].dob %>" />
+    <div id="dobError" class="error"></div>
+  </div>
+  <div class="mb-3">
+    <label for="score" class="form-label">Score:</label>
+    <input type="number" name="score" required class="form-control" id="score" value="<%= user[0].score %>" />
+    <div id="scoreError" class="error"></div>
+  </div>
+  <button type="submit" class="btn btn-success">Update</button>
+</form>
+
+<script>
+function validateForm() {
+    const name = document.getElementById("name").value;
+    const roll = document.getElementById("roll").value;
+    const dob = document.getElementById("dob").value;
+    const score = document.getElementById("score").value;
+    
+    let isValid = true;
+    
+    // Clear previous error messages
+    const errorElements = document.querySelectorAll(".error");
+    errorElements.forEach(element => element.textContent = "");
+
+    // Validate Name
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required";
+        isValid = false;
+    } else if (/^[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/\\-]/.test(name)) {
+        document.getElementById("nameError").textContent = "Name cannot start with a special character or number";
+        isValid = false;
+    }
+
+    // Validate Roll No.
+    if (roll === "") {
+        document.getElementById("rollError").textContent = "Roll No. is required";
+        isValid = false;
+    } else if (roll <= 0 || roll > 10000) {
+        document.getElementById("rollError").textContent = "Roll No. must be between 1 and 10000";
+        isValid = false;
+    }
+
+    // Validate Date of Birth
+    if (dob === "") {
+        document.getElementById("dobError").textContent = "Date of Birth is required";
+        isValid = false;
+    } else {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        const age = today.getFullYear() - birthDate.getFullYear();
+        if (age < 18 || age > 60) {
+            document.getElementById("dobError").textContent = "Age must be between 18 and 60";
+            isValid = false;
+        }
+    }
+
+    // Validate Score
+    if (score === "") {
+        document.getElementById("scoreError").textContent = "Score is required";
+        isValid = false;
+    } else if (score < 0 || score > 100) {
+        document.getElementById("scoreError").textContent = "Score must be between 0 and 100";
+        isValid = false;
+    } else if (score === "0") {
+        document.getElementById("scoreError").textContent = "Fail";
+    }
+
+    return isValid;
+}
+</script>
+
+<style>
+.error {
+    color: red;
+}
+</style>

@@ -1,0 +1,51 @@
+<a href="/logout" class="btn btn-info logout-btn" style="margin-top:0px;float: right;">Logout</a>
+
+
+<div style="text-align: right; margin-top: 2%; margin-right: 18%;">
+   
+    <a href="/teacher/add" class="btn btn-primary">Add Record</a>
+</div>
+
+<h4>All Students</h4>
+<div id="totalRowsCount" style="position: relative; left: 15%; font-weight: bold;"></div>
+<div class="tableDiv">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Roll No.</th>
+                <th scope="col">Name</th>       
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Score</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%  student.forEach(element => { %>
+                <tr class="head">
+                    <td><%= element.roll %></td>
+                    <td><%= element.name %></td>               
+                    <td><%= element.dob %></td>
+                    <td><%= element.score %></td> 
+                    <td>
+                        <a href="/teacher/edit/<%= element._id %>"><img width="48" height="48" src="https://img.icons8.com/color/48/edit--v1.png" alt="edit--v1"/></a>
+                        <a href="/teacher/delete/<%= element._id %>"><img width="48" height="48" src="https://img.icons8.com/fluency/48/full-trash.png" alt="full-trash"/></a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+ 
+   
+</div>
+<script>
+   
+    document.addEventListener("DOMContentLoaded", function() {
+      
+        var tbody = document.querySelector(".tableDiv table tbody");
+         var numRows = tbody.querySelectorAll("tr").length;
+        var totalRowsElement = document.getElementById("totalRowsCount");
+       totalRowsElement.textContent = `Total ${numRows} Students`
+    });
+</script>
+

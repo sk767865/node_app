@@ -1,0 +1,131 @@
+<a href="/" class="btn btn-info logout-btn" style="margin-top:0px;float: right;">Logout</a>
+<a href="/teacher/viewall" class="btn btn-info" style="margin-top: 5px;width: 5%;">Back</a>
+
+<h4>Add Student-Result</h4>
+
+
+<form method="POST" class="addStu" autocomplete="off" onsubmit="return validateForm()" id="studentForm">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Roll No. : </label>
+        <input type="number" name="roll" required class="form-control" id="roll">
+        <div id="rollError" class="error"></div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name : </label>
+        <input type="text" name="name" required class="form-control" id="name">
+        <div id="nameError" class="error"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Date of Birth : </label>
+        <input type="date" name="dob" required class="form-control" id="dob">
+        <div id="dobError" class="error"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Score : </label>
+        <input type="number" name="score" required class="form-control" id="score">
+        <div id="scoreError" class="error"></div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a href="" class="btn btn-primary" id="clearFormButton">Clear</a>
+
+
+      <% if (flag === true) { %>
+        <!-- Content to display when flag is true -->
+        <div id="successMessage" class="success-msg" style="color: green;margin-top: 1%;">Form submitted successfully!!!</div>
+      <% } else if (flag === false) { %>
+        <!-- Content to display when flag is false -->
+        <div id="duplicaterollerror" class="error-msg" style="color: red;margin-top: 1%;">A Record with this roll number already Present , plz try any other roll number !</div>
+      <% } %>
+      
+      
+
+   
+</form>
+
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<script>
+    function validateForm() {
+        const roll = document.getElementById("roll").value;
+        const name = document.getElementById("name").value;
+        const dob = document.getElementById("dob").value;
+        const score = document.getElementById("score").value;
+
+        let isValid = true;
+
+        // Get form and clear button elements
+        var studentForm = document.getElementById("studentForm");
+        var clearFormButton = document.getElementById("clearFormButton");
+
+        // Add click event listener to clear button
+        clearFormButton.addEventListener("click", function () {
+            // Reset the form to clear all fields
+            studentForm.reset();
+        });
+
+
+        // Clear previous error messages
+        const errorElements = document.querySelectorAll(".error");
+        errorElements.forEach(element => element.textContent = "");
+
+        // Validate Roll No.
+        if (roll === "") {
+            document.getElementById("rollError").textContent = "Roll No. is required";
+            isValid = false;
+        } else if (roll <= 0 || roll > 10000) {
+            document.getElementById("rollError").textContent = "Roll No. must be between 1 and 10000";
+            isValid = false;
+        }
+
+        // Validate Name
+        if (name === "") {
+            document.getElementById("nameError").textContent = "Name is required";
+            isValid = false;
+        } else if (/^[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/\\-]/.test(name)) {
+            document.getElementById("nameError").textContent = "Name cannot start with a special character or number";
+            isValid = false;
+        }
+
+        // Validate Date of Birth
+        if (dob === "") {
+            document.getElementById("dobError").textContent = "Date of Birth is required";
+            isValid = false;
+        } else {
+            const today = new Date();
+            const birthDate = new Date(dob);
+            const age = today.getFullYear() - birthDate.getFullYear();
+            if (age < 18 || age > 60) {
+                document.getElementById("dobError").textContent = "Age must be between 18 and 60";
+                isValid = false;
+            }
+        }
+
+        // Validate Score
+        if (score === "") {
+            document.getElementById("scoreError").textContent = "Score is required";
+            isValid = false;
+        } else if (score < 0 || score > 100) {
+            document.getElementById("scoreError").textContent = "Give valid score from 0 to 100 only";
+            isValid = false;
+        } else if (score === "0") {
+            document.getElementById("scoreError").textContent = "Fail";
+        }
+
+
+
+
+        return isValid;
+    }
+
+
+      
+
+</script>

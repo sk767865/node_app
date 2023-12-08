@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Login Page</title>
+</head>
+<body>
+  <div class="container text-center mt-5">
+    <p class="text" style="color: black;">Login as</p>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <img src="/images/teacherimg.jpg" alt="Teacher" class="card-img-top" style="width: 100%; height: 200px;">
+          <div class="card-body">
+            <a href="/common/login" onclick="setRoleCookie('teacher')" class="btn btn-primary btn-block">Login as Teacher</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <img src="/images/studentimg.jpg" alt="Student" class="card-img-top" style="width: 100%; height: 200px;">
+          <div class="card-body">
+            <a href="/common/login" onclick="setRoleCookie('student')" class="btn btn-primary btn-block">Login as Student</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setRoleCookie(role) {
+        document.cookie = `role=${role}`;
+    }
+  </script>
+</body>
+</html>

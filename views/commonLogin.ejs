@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <a href="/" class="btn btn-info logout-btn" style="margin-top: 0px;float: right;">Back</a>
+
+<% if (role === 'teacher') { %>
+    <h3 style="margin-top: 90px">Welcome, Teacher!</h3>
+<% } else if (role === 'student') { %>
+    <h3 style="margin-top: 90px">Welcome, Student!</h3>
+<% } %>
+
+ <div class="teachLog">
+    <form method="POST" class="teachForm">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username : </label>
+        <input type="text" name="username" class="form-control" id="username">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password : </label>
+        <input type="password" name="password" class="form-control" id="pass">
+       
+       
+        <input type="checkbox" style="width: 30px;" onclick="myFunction()"> Show Password
+        <br>
+      </div>
+      <a><button type="submit" class="btn btn-success">Submit</button></a>
+     
+      <a href="" class="btn btn-primary" id="clearBtn">Clear</a>
+
+      <br>
+     
+    </form>
+
+
+   
+  </div>
+
+  <% if (error) { %>
+    <p style="color: red; margin-top: 1%;margin-left: 38%;"><%= error %></p>
+   
+  <% } %>
+
+ 
+  <script>
+    function myFunction() {
+      var x = document.getElementById("pass");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    var clearBtn = document.getElementById("clearBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function() {
+        var errorMessage = document.querySelector("p");
+        if (errorMessage) {
+          errorMessage.remove();
+          clearBtn.remove();
+        }
+      });
+    }
+
+
+
+  </script>
+</body>
+
+</html>
